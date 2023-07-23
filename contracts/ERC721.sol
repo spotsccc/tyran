@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 pragma solidity ^0.8.19;
 
 import "./IERC721.sol";
@@ -46,12 +48,12 @@ contract ERC721 is IERC721 {
         emit Approval(msg.sender, to, tokenId);
     }
 
-    function safeMint(address to, uint tokenId) internal virtual {
+    function safeMint(address to, uint tokenId) onlyOwner() public virtual {
         require(_checkOnERC721Receiver(msg.sender, to, tokenId), "Non ERC721 receiver!");
         _mint(to, tokenId);
     }
 
-    function _mint(address to, uint tokenId) internal virtual {
+    function _mint(address to, uint tokenId) onlyOwner() public virtual {
         require(to != address(0), "Can't burn token!");
         balances[to]++;
         owners[tokenId] = to;
