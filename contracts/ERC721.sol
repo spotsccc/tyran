@@ -59,8 +59,8 @@ contract ERC721 is IERC721 {
         owners[tokenId] = to;
     }
 
-    function isApprovedForAll(address owner, address operator) public view returns (bool) {
-        return approvalsForAll[owner][operator];
+    function isApprovedForAll(address _owner, address operator) public view returns (bool) {
+        return approvalsForAll[_owner][operator];
     }
 
     function getApproved(uint tokenId) public view returns (address) {
