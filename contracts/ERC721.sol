@@ -55,8 +55,10 @@ contract ERC721 is IERC721 {
 
     function _mint(address to, uint tokenId) onlyOwner() public virtual {
         require(to != address(0), "Can't burn token!");
+        require(ownerOf(tokenId) == address(0), "Token already exist!");
         balances[to]++;
         owners[tokenId] = to;
+        emit Minted(to, tokenId);
     }
 
     function isApprovedForAll(address _owner, address operator) public view returns (bool) {
@@ -85,6 +87,7 @@ contract ERC721 is IERC721 {
         require(from == ownerOf(tokenId), "Not an owner!");
         require(to != address(0), "Wrong \"to\" address");
         _beforeTokenTransfer(from, to, tokenId);
+        delete approvals[tokenId];
         owners[tokenId] = to;
         balances[from]--;
         balances[to]++;
