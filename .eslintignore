@@ -1,0 +1,7 @@
+.next
+artifacts
+cache
+contracts
+typechain-types
+node_modules
+.husky
