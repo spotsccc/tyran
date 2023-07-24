@@ -5,6 +5,7 @@ module.exports = configure({
     presets.react({ version: '18.0' }),
     presets.effector(),
     presets.prettier(),
+    presets.nextJs(),
     presets.typescript(),
     presets.node(),
   ],
