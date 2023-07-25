@@ -1,6 +1,7 @@
 import { Signer } from 'ethers'
 import { ethers } from 'hardhat'
 import { ERC721 } from '../typechain-types'
+import { expect } from 'chai'
 
 const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000'
 
@@ -31,8 +32,8 @@ describe('ERC721', () => {
 
     await expect(erc721.connect(owner).safeMint(client1Address, 1))
       .to.emit(erc721, 'Minted')
-      .withArgs(client1Address, 0)
-    expect(await erc721.ownerOf(0)).to.eq(client1Address)
+      .withArgs(client1Address, 1)
+    expect(await erc721.ownerOf(1)).to.eq(client1Address)
     expect(await erc721.balanceOf(client1Address)).to.eq(1)
   })
 
