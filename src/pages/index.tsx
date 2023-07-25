@@ -1,5 +1,3 @@
-function Page() {
-  return <h1 className="text-3xl font-bold underline">Hello world!</h1>
-}
+import { HomePage } from '../_pages/home'
 
-export default Page
+export default HomePage
