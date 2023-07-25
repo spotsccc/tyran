@@ -1,0 +1,35 @@
+name: Run all tests
+
+on:
+  push:
+    branches: ["master"]
+  pull_request:
+    branches: ["master"]
+
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Coping sources
+        uses: actions/checkout@v3
+
+      - name: Set up node v20
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20.x
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Install dependencies
+        run: pnpm ci
+
+      - name: Compile contracts
+        run: pnpm run compile:contracts
+
+      - name: Run contract tests
+        run: pnpm run test:contracts
