@@ -53,7 +53,7 @@ contract ERC721 is IERC721 {
         _mint(to, tokenId);
     }
 
-    function _mint(address to, uint tokenId) onlyOwner() public virtual {
+    function _mint(address to, uint tokenId) internal virtual {
         require(to != address(0), "Can't burn token!");
         require(ownerOf(tokenId) == address(0), "Token already exist!");
         balances[to]++;
