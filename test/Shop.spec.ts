@@ -2,7 +2,8 @@ import { Shop } from '../typechain-types'
 import { Signer } from 'ethers'
 import { ethers } from 'hardhat'
 import { expect } from 'chai'
-import exp from 'constants'
+
+const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000'
 
 describe('Shop', () => {
   let shop: Shop
@@ -57,5 +58,56 @@ describe('Shop', () => {
     await expect(shop.connect(signer2).placeToMarket(0, 1)).revertedWith(
       'Access denied!',
     )
+  })
+
+  it('should be possible to buy item from seller', async () => {
+    const price = 10000000
+    const tokenId = 0
+    await shop.connect(signer1).buy({ value: 100000 })
+    await shop.connect(signer1).placeToMarket(tokenId, price)
+
+    const tx = shop.connect(signer2).buyFromSeller(tokenId, { value: price })
+    await expect(tx)
+      .to.emit(shop, 'BoughtFromSeller')
+      .withArgs(
+        await signer1.getAddress(),
+        await signer2.getAddress(),
+        price,
+        tokenId,
+      )
+    await expect(tx).to.changeEtherBalance(signer1, price)
+    expect(await shop.ownerOf(tokenId)).to.eq(await signer2.getAddress())
+    expect(await shop.getApproved(tokenId)).to.eq(ZERO_ADDRESS)
+    const placedItem = await shop.getPlacedItem(tokenId)
+    expect(placedItem[0]).to.eq(ZERO_ADDRESS)
+  })
+
+  it('should revert transaction if owner of token changed', async () => {
+    const price = 10000000
+    const tokenId = 0
+    await shop.connect(signer1).buy({ value: 100000 })
+    await shop.connect(signer1).placeToMarket(tokenId, price)
+    await shop
+      .connect(signer1)
+      .transferFrom(
+        await signer1.getAddress(),
+        await signer2.getAddress(),
+        tokenId,
+      )
+
+    await expect(
+      shop.connect(signer2).buyFromSeller(tokenId, { value: price }),
+    ).to.be.revertedWith('Owner of item changed!')
+  })
+
+  it('should revert transaction if not enough funds', async () => {
+    const price = 10000000
+    const tokenId = 0
+    await shop.connect(signer1).buy({ value: 100000 })
+    await shop.connect(signer1).placeToMarket(tokenId, price)
+
+    await expect(
+      shop.connect(signer2).buyFromSeller(tokenId, { value: price - 1 }),
+    ).to.be.revertedWith('Not enough funds!')
   })
 })

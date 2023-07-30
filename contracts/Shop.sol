@@ -109,6 +109,21 @@ contract Shop is ERC721 {
     emit Placed(msg.sender, _price, tokenId);
   }
 
+  function buyFromSeller(uint tokenId) payable external {
+    PlacedItem memory placedItem = getPlacedItem(tokenId);
+    if (ownerOf(tokenId) != placedItem.owner) {
+      revert("Owner of item changed!");
+    }
+    require(msg.value >= placedItem.price, "Not enough funds!");
+    _transfer(placedItem.owner, msg.sender, tokenId);
+    delete placedItems[tokenId];
+    payable(placedItem.owner).transfer(placedItem.price);
+    if (msg.value - placedItem.price > 0) {
+      payable(msg.sender).transfer(msg.value - placedItem.price);
+    }
+    emit BoughtFromSeller(placedItem.owner, msg.sender, placedItem.price, tokenId);
+  }
+
   function random() private returns (uint8) {
     nonce++; // Increase nonce with each call to prevent the same result when called within the same block by the same sender
     return uint8(uint(keccak256(abi.encodePacked(block.timestamp, blockhash(block.number - 1), msg.sender, nonce))) % 100);
