@@ -19,10 +19,17 @@ contract Shop is ERC721 {
     Property property;
   }
 
+  struct PlacedItem {
+    address owner;
+    uint price;
+    uint id;
+  }
+
   uint private nonce = 0;
   mapping(uint => Weapon) public weapons;
   uint public price = 100000;
   uint public lastTokenId = 0;
+  mapping(uint => PlacedItem) public placedItems;
 
   constructor() ERC721("MyToken", "My") {}
 
@@ -90,6 +97,16 @@ contract Shop is ERC721 {
 
   function getWeapon(uint id) public view returns(Weapon memory) {
     return weapons[id];
+  }
+
+  function getPlacedItem(uint id) public view returns(PlacedItem memory) {
+    return placedItems[id];
+  }
+
+  function placeToMarket(uint tokenId, uint _price) external {
+    approve(address(this), tokenId);
+    placedItems[tokenId] = PlacedItem(msg.sender, _price, tokenId);
+    emit Placed(msg.sender, _price, tokenId);
   }
 
   function random() private returns (uint8) {

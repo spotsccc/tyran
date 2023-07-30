@@ -41,7 +41,7 @@ contract ERC721 is IERC721 {
         return balances[account];
     }
 
-    function approve(address to, uint tokenId) approvedOrOwner(msg.sender, tokenId) external {
+    function approve(address to, uint tokenId) approvedOrOwner(msg.sender, tokenId) public {
         address _owner = ownerOf(tokenId);
         require(to != _owner, "Can't get approve to owner!");
         approvals[tokenId] = to;
