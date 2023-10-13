@@ -8,6 +8,7 @@ node_modules
 packages/contracts/artifacts
 packages/contracts/typechain-types
 packages/contracts/cache
+.idea/
 
 # testing
 coverage
