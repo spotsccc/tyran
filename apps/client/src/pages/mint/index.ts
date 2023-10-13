@@ -1,0 +1,1 @@
+export { MintArtifactPage } from './ui'

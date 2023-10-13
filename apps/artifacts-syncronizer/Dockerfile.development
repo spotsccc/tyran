@@ -1,0 +1,22 @@
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Copy root package.json and lockfile
+COPY package.json ./
+COPY pnpm-lock.yaml ./
+
+# Copy the docs package.json
+COPY apps/event-listener/package.json ./apps/event-listener/package.json
+
+RUN npm install -g pnpm
+
+# Copy app source
+COPY . .
+
+EXPOSE 8000
+
+WORKDIR /app/apps/event-listener
+RUN pnpm install
+
+CMD ["pnpm", "run", "dev"]

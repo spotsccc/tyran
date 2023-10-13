@@ -4,16 +4,234 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e87028b8-699f-4cc9-8698-4d3c330740d7" name="Changes" comment="" />
+    <list default="true" id="bce5e285-3ac4-4fc3-a87a-a9803782a607" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.dockerignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/.babelrc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/.dockerignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/.eslintignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/.eslintrc.cjs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/.prettierignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/.prettierrc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/Dockerfile.development" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/jest.config.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/postcss.config.cjs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/app/global.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/app/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/entity/artifact/assets/gem.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/entity/artifact/assets/test.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/entity/artifact/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/entity/artifact/ui/card-by-id.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/entity/artifact/ui/card-list.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/entity/artifact/ui/card-placeholder.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/entity/artifact/ui/card.story.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/entity/artifact/ui/card.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/features/account/connect/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/features/account/connect/model.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/features/account/connect/ui.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/features/artifact/buy-from-market/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/features/artifact/buy-from-market/model.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/features/artifact/buy-from-market/ui.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/features/artifact/mint/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/features/artifact/mint/model.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/features/artifact/mint/ui.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/features/artifact/place-to-market/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/features/artifact/place-to-market/model.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/features/artifact/place-to-market/ui.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/pages/artifact/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/pages/artifact/model.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/pages/artifact/ui.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/pages/home/binded-ui/home-page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/pages/home/binded-ui/network-error-message.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/pages/home/binded-ui/wallet-connection.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/pages/home/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/pages/home/model.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/pages/home/ui/network-error-message.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/pages/home/ui/wallet-connection.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/pages/market/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/pages/market/model.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/pages/market/ui.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/pages/mint/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/pages/mint/model.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/pages/mint/ui.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/pages/my-artifacts/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/pages/my-artifacts/model.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/pages/my-artifacts/sync-query.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/pages/my-artifacts/ui/artifacts-infinite-scroll.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/pages/my-artifacts/ui/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/pages/my-artifacts/ui/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/pages/my-artifacts/ui/search-form.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/shared/api/base-request.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/shared/api/get-artifact.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/shared/api/get-lots.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/shared/api/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/shared/api/users.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/shared/app/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/shared/ethereum/errors.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/shared/ethereum/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/shared/ethereum/model/account.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/shared/ethereum/model/provider.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/shared/ethereum/model/shop.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/shared/lib/filter/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/shared/lib/observer/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/shared/lib/page-ready/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/shared/lib/pagination/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/shared/lib/price/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/shared/lib/price/simplify-number-string.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/shared/lib/price/simplify-number-string.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/shared/lib/price/wei-to-eth.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/shared/lib/price/wei-to-eth.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/shared/lib/void/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/shared/router/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/shared/ui/button/common-button.story.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/shared/ui/button/common-button.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/shared/ui/button/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/shared/ui/modal/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/shared/ui/modal/ui.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/shared/ui/select/assets/cross.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/shared/ui/select/assets/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/shared/ui/select/assets/shevron-down.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/shared/ui/select/assets/shevron-up.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/shared/ui/select/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/shared/ui/select/multi-select.story.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/src/shared/ui/select/multi-select.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/client/tailwind.config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/event-listener/.dockerignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/event-listener/.eslintignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/event-listener/.eslintrc.cjs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/event-listener/.prettierignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/event-listener/.prettierrc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/event-listener/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/event-listener/Dockerfile.development" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/event-listener/nodemon.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/event-listener/src/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/event-listener/tsconfig.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/server/.dockerignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/server/.eslintignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/server/.eslintrc.cjs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/server/.prettierignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/server/.prettierrc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/server/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/server/Dockerfile.development" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/server/api-example/artifacts.http" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/server/api-example/lots.http" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/server/knexfile.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/server/migrations/20230809083200_users.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/server/nodemon.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/server/src/app/artifacts/artifacts-controller.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/server/src/app/artifacts/artifacts-synchronizer.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/server/src/app/artifacts/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/server/src/app/lots/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/server/src/app/lots/lots-controller.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/server/src/app/users/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/server/src/app/users/users-controller.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/server/src/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/server/src/infrastructure/artifacts-repository/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/server/src/infrastructure/artifacts-repository/instance.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/server/src/infrastructure/endpoints/artifacts/get-artifact.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/server/src/infrastructure/endpoints/artifacts/get-artifacts.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/server/src/infrastructure/endpoints/artifacts/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/server/src/infrastructure/endpoints/lots/get-lots.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/server/src/infrastructure/endpoints/lots/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/server/src/infrastructure/endpoints/users/account-connected.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/server/src/infrastructure/endpoints/users/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/server/src/infrastructure/fastify/env.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/server/src/infrastructure/fastify/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/server/src/infrastructure/lots-repository/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/server/src/infrastructure/lots-repository/instance.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/server/src/infrastructure/postgre/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/server/src/infrastructure/rabbit-mq-message-listener/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/server/src/infrastructure/sale-records-repository/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/server/src/infrastructure/sale-records-repository/instance.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/server/src/infrastructure/users-repository/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/server/src/shared/error-handler/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/server/src/shared/http-errors/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/server/src/shared/lib/normilizer/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/server/tsconfig.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker-compose.dev.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-contract/.eslintignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-contract/.eslintrc.cjs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-contract/.prettierignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-contract/.prettierrc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-contract/src/artifact.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-contract/src/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-contract/src/lot.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-contract/src/normalized-entity.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-contract/src/response.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-contract/src/sale-record.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-contract/src/user.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/api-contract/tsconfig.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/contracts/.dockerignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/contracts/.eslintignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/contracts/.eslintrc.cjs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/contracts/.prettierignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/contracts/.prettierrc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/contracts/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/contracts/contracts/ERC721.sol" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/contracts/contracts/IERC721.sol" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/contracts/contracts/IERC721Receiver.sol" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/contracts/contracts/Shop.sol" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/contracts/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/contracts/test/ERC721.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/contracts/test/Shop.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/eslint-config-custom/.eslintrc.cjs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/eslint-config-custom/.prettierrc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/eslint-config-custom/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/eslint-config-custom/client.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/eslint-config-custom/node.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.eslintrc.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.npmrc" beforeDir="false" afterPath="$PROJECT_DIR$/.npmrc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/docs/.eslintrc.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/docs/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/docs/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/docs/app/layout.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/docs/app/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/docs/next-env.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/docs/next.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/docs/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/docs/tsconfig.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web/.eslintrc.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web/app/layout.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web/app/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web/next-env.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web/next.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web/tsconfig.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/eslint-config-custom/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/eslint-config-custom/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/eslint-config-custom/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/tsconfig/base.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/tsconfig/nextjs.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/tsconfig/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/tsconfig/react-library.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/ui/Button.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/ui/Header.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/ui/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/ui/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/ui/tsconfig.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/ui/turbo/generators/config.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/ui/turbo/generators/templates/component.hbs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pnpm-workspace.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pnpm-workspace.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/turbo.json" beforeDir="false" afterPath="$PROJECT_DIR$/turbo.json" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="MacroExpansionManager">
+    <option name="directoryName" value="cs00dd7g" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectId" id="2TfdHzMX3MrgAIL6V1HYovwjWHT" />
+  <component name="ProjectId" id="2Vu1rbtNPhOIDT8ldELoaFsvSaD" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -23,30 +241,25 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "true",
-    "last_opened_file_path": "/Users/chernenkoik/personal-projects/tyran-server",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "ts.external.directory.path": "/Applications/WebStorm.app/Contents/plugins/javascript-impl/jsLanguageServicesImpl/external",
+    "nodejs_package_manager_path": "pnpm",
+    "ts.external.directory.path": "/Users/chernenkoik/personal-projects/tyran/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$" />
-    </key>
-  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="e87028b8-699f-4cc9-8698-4d3c330740d7" name="Changes" comment="" />
-      <created>1691437984329</created>
+      <changelist id="bce5e285-3ac4-4fc3-a87a-a9803782a607" name="Changes" comment="" />
+      <created>1695671352948</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1691437984329</updated>
-      <workItem from="1691437985344" duration="2470000" />
+      <updated>1695671352948</updated>
+      <workItem from="1695671354343" duration="55000" />
+      <workItem from="1695737937616" duration="470000" />
     </task>
     <servers />
   </component>

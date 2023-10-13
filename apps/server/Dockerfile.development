@@ -1,0 +1,22 @@
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Copy root package.json and lockfile
+COPY package.json ./
+COPY pnpm-lock.yaml ./
+
+# Copy the docs package.json
+COPY apps/server/package.json ./apps/server/package.json
+
+RUN npm install -g pnpm
+
+# Copy app source
+COPY . .
+
+EXPOSE 8000
+
+WORKDIR /app/apps/server
+RUN pnpm install
+
+CMD ["pnpm", "run", "dev"]

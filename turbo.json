@@ -7,9 +7,12 @@
       "outputs": [".next/**", "!.next/cache/**"]
     },
     "lint": {},
+    "format": {},
     "dev": {
       "cache": false,
       "persistent": true
-    }
+    },
+    "deploy": {},
+    "test": {}
   }
 }

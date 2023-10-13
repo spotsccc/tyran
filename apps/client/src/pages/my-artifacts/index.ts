@@ -1,0 +1,1 @@
+export { MyArtifactsPage } from './ui'

@@ -1,0 +1,70 @@
+services:
+  database:
+    image: postgres:15.2
+    env_file: .env
+    environment:
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+      - POSTGRES_USER=${DATABASE_USER}
+      - POSTGRES_DB=${DATABASE}
+    ports:
+      - ${DATABASE_PORT}:${DATABASE_PORT}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - app_network
+
+  server:
+    build:
+      context: .
+      dockerfile: ./apps/server/Dockerfile
+    env_file: .env
+    ports:
+      - ${SERVER_PORT}:${SERVER_PORT}
+    networks:
+      - app_network
+
+  client:
+    build:
+      context: .
+      dockerfile: ./apps/client/Dockerfile
+    env_file: .env
+    ports:
+      - ${CLIENT_PORT}:${CLIENT_PORT}
+    networks:
+      - app_network
+
+  event-listener:
+    build:
+      context: .
+      dockerfile: ./apps/event-listener/Dockerfile
+    env_file: .env
+    networks:
+      - app_network
+
+  hardhat:
+    build:
+      context: .
+      dockerfile: ./packages/contracts/Dockerfile
+    ports:
+      - ${HARDHAT_PORT}:${HARDHAT_PORT}
+    networks:
+      - app_network
+
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: rabbitmq
+    env_file: .env
+    ports:
+      - ${RABBITMQ_PORT}:${RABBITMQ_PORT}
+      - ${RABBITMQ_UI_PORT}:${RABBITMQ_UI_PORT}
+    networks:
+      - app_network
+
+
+
+volumes:
+  pgdata:
+
+networks:
+  app_network:
+    driver: bridge
