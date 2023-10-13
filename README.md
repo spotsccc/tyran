@@ -1,81 +1,84 @@
-# Turborepo starter
+# About "Tyran" Project
 
-This is an official starter Turborepo.
+"Tyran" is a Minimum Viable Product (MVP) of an NFT marketplace.
 
-## Using this example
+**Main Features:**
 
-Run the following command:
+1. Mint NFT
+2. List NFTs on the marketplace
+3. Purchase NFTs from the marketplace
+4. View NFTs that you own
 
-```sh
-npx create-turbo@latest
+# Stack
+
+**Repository:**
+
+- [Turborepo](https://github.com/concordsd/turborepo)
+- [pnpm workspaces](https://pnpm.io/workspaces)
+
+**Backend:**
+
+- [NestJS](https://nestjs.com/)
+- [Fastify](https://www.fastify.io/)
+- [RabbitMQ](https://www.rabbitmq.com/)
+- [Postgres](https://www.postgresql.org/)
+
+**Frontend:**
+
+- [React](https://reactjs.org/)
+- [Vite](https://vitejs.dev/)
+- [ethers](https://docs.ethers.io/v5/)
+- [effector](https://effector.dev/)
+
+**Blockchain:**
+
+- [Solidity](https://soliditylang.org/)
+- [Hardhat](https://hardhat.org/)
+
+# Quickstart
+
+To run the project locally, make sure you have Docker installed and run the following command:
+
+```bash
+docker-compose -f docker-compose.dev.yml up
 ```
 
-## What's inside?
+After that, deploy the smart contract in your local Hardhat environment using the following command:
 
-This Turborepo includes the following packages/apps:
-
-### Apps and Packages
-
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `ui`: a stub React component library shared by both `web` and `docs` applications
-- `eslint-config-custom`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `tsconfig`: `tsconfig.json`s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
-
-```
-cd my-turborepo
-pnpm build
+```bash
+pnpm run smartcontract:deploy
 ```
 
-### Develop
+You can access the main page of the site at http://localhost:4000. To use the main features, you should install the Metamask extension and add the Hardhat network. You can do this by following these instructions:
 
-To develop all apps and packages, run the following command:
+1. Install [Metamask](https://metamask.io/download/).
+2. Add the Hardhat network to [Metamask](https://docs.metamask.io/wallet/how-to/get-started-building/run-devnet/).
 
-```
-cd my-turborepo
-pnpm dev
-```
+# Code Roadmap
 
-### Remote Caching
+In the "apps" directory, you will find three services:
 
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
+1. `client`: Web client.
+2. `server`: Main server that stores data about NFTs and provides main features to work with NFTs.
+3. `artifacts-synchronizer`: A service that listens to the blockchain network and sends events to the server via RabbitMQ from the smart contract.
 
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
+In the "packages" directory, there are two packages:
 
-```
-cd my-turborepo
-npx turbo login
-```
+1. `contracts`: A package with all smart contracts, their types, and tests.
+2. `api-contracts`: A package with API contracts used by the server and client.
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+# Deep Dive into Architecture:
 
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
+## Web
 
-```
-npx turbo link
-```
+The web client uses the Feature Slice Design architecture. For more information, refer to the [official documentation](https://feature-sliced.design/).
 
-## Useful Links
+## Server
 
-Learn more about the power of Turborepo:
+The server follows a Three-Layer Architecture. This architecture is chosen based on the project's size and includes three layers:
 
-- [Tasks](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
+1. **Application Layer**: Contains only business logic and should not depend on any other layer.
+
+2. **Infrastructure Layer**: Represents all integration with the external world, such as the database, other services, etc.
+
+3. **Presentation Layer**: Serves as the entry point to the application.
