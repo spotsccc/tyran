@@ -1,6 +1,6 @@
 import './model'
 import { useUnit } from 'effector-react'
-import { ArtifactCard } from '@/entity/artifact'
+import { ArtifactCard } from '@/entities/artifact'
 import { PlaceToMarketButton } from '@/features/artifact/place-to-market'
 import { getArtifactQuery } from '@/shared/api/get-artifact'
 

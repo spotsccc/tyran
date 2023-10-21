@@ -1,6 +1,6 @@
 import { useUnit } from 'effector-react'
 import { useCallback } from 'react'
-import { ArtifactList } from '@/entity/artifact'
+import { ArtifactList } from '@/entities/artifact'
 import { getArtifactsQuery } from '@/shared/api'
 import {
   $artifactsEntities,

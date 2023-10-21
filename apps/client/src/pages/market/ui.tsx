@@ -1,61 +1,48 @@
-import { useUnit } from 'effector-react'
-import { $artifacts, $artifactsIds, $loading, $lots, $lotsIds } from './model'
 import { cx } from 'class-variance-authority'
-import { Burger } from '@/shared/ui/burger'
-import { RombIcon } from '@/shared/assets'
+import { FiltersIcon } from '@/shared/assets'
+import { ChangeEventHandler } from 'react'
+import { Header } from '@/widgets/header'
+import { Avatar } from '@/widgets/avatar'
+import { artifactFeed } from '@/widgets/artifact/feed'
+import { $$artifactFeed } from './model'
 
 export function MarketPage() {
   return (
-    <div>
-      <Header />
-      <Avatar address="address" username="username" />
+    <div className={cx('px-6 py-7', 'md:px-8')}>
+      <Header className="pb-9 md:pb-13" />
+      <Avatar
+        className="pb-10 md:pb-13"
+        address="address"
+        username="username"
+      />
+      <artifactFeed.Ui model={$$artifactFeed} />
     </div>
   )
 }
 
-export type HeaderProps = {
+export type SearchInputProps = {
+  value?: string
+  onChange?: ChangeEventHandler<HTMLInputElement>
   className?: string
+  onIconClick?: () => void
 }
 
-export function Header({ className }: HeaderProps) {
+export function SearchInput({ value, onChange, className }: SearchInputProps) {
   return (
-    <header className={cx(className, 'flex justify-between')}>
-      <Logo />
-      <Burger />
-    </header>
-  )
-}
-
-export function Logo() {
-  return <div className="text-base-white font-bold text-xl">Tyran</div>
-}
-
-export type AvatarProps = {
-  className?: string
-  username: string | null
-  address: string | null
-}
-
-export function Avatar({ className }: AvatarProps) {
-  return (
-    <div className={cx(className, 'flex gap-4')}>
-      <img className="rounded-full border-1 border-base-white w-10 h-10" />
-      <div>
-        <div className="text-base-white mb-2">Username</div>
-        <div className="flex gap-1 text-sm items-center text-base-white opacity-50">
-          <RombIcon />
-          ADDRESS
-        </div>
-      </div>
+    <div className="relative">
+      <FiltersIcon className="absolute top-4 right-6 md:hidden" />
+      <input
+        onChange={onChange}
+        value={value}
+        placeholder="Search by name"
+        className={cx(
+          className,
+          'w-full text-base-white bg-base-black border-base-white h-9 opacity-50',
+          'focus:opacity-100 focus:outline-none',
+          'max-md:rounded-xxl max-md:border-1 max-md:px-6',
+          'md:border-b-2 md:text-2xl',
+        )}
+      />
     </div>
-  )
-}
-
-export function SearchInput() {
-  return (
-    <input
-      placeholder="Search by name"
-      className="w-full rounded-xxl px-6 text-base-white bg-base-black border-1 border-base-white h-9"
-    />
   )
 }

@@ -71,18 +71,18 @@ export type Artifact = {
 }
 
 export function artifactMap({
-  artifactRow,
+  artifactRaw,
   id,
   owner,
 }: {
-  artifactRow: Shop.WeaponStructOutput
+  artifactRaw: Shop.WeaponStructOutput
   id: string
   owner: string
 }): Artifact {
   return {
-    gems: artifactRow.gems.map((gem) => GEM_MAPPER[gem.toString() as GemRaw]),
-    rarity: RARITY_MAPPER[artifactRow.rarity.toString() as RarityRaw],
-    property: PROPERTY_MAPPER[artifactRow.property.toString() as PropertyRaw],
+    gems: artifactRaw.gems.map((gem) => GEM_MAPPER[gem.toString() as GemRaw]),
+    rarity: RARITY_MAPPER[artifactRaw.rarity.toString() as RarityRaw],
+    property: PROPERTY_MAPPER[artifactRaw.property.toString() as PropertyRaw],
     name: 'Frostmorn',
     id: id.toString(),
     owner,

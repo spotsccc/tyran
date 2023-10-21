@@ -1,7 +1,7 @@
 import { Artifact } from 'api-contract'
 import { Store } from 'effector'
 import { useStoreMap } from 'effector-react'
-import { ArtifactCard } from '@/entity/artifact'
+import { ArtifactCard } from './card'
 
 export type ArtifactCardByIdProps = {
   id: string
@@ -9,11 +9,13 @@ export type ArtifactCardByIdProps = {
 }
 
 export function ArtifactCardById({ $artifacts, id }: ArtifactCardByIdProps) {
-  const { rarity, name, gems, property } = useStoreMap({
+  const kek = useStoreMap({
     store: $artifacts,
     keys: [id],
     fn: (artifacts, [id]) => artifacts[id],
   })
+  console.log('kek')
+  const { rarity, name, gems, property } = kek
   return (
     <ArtifactCard
       id={id}
