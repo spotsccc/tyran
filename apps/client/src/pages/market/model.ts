@@ -1,23 +1,30 @@
 import { sample } from 'effector'
-import { or } from 'patronum'
+import { debug, or } from 'patronum'
 import { getLotsQuery } from '@/shared/api/get-lots'
-import { marketRoute } from '@/shared/router'
+import { artifactRoute, marketRoute } from '@/shared/router'
+import { artifactFeed } from '@/widgets/artifact/feed'
+import { createPageReady } from '@/shared/lib/page-ready'
+import { $$account, AccountState } from '@/shared/ethereum'
 
 export const $loading = or(
   getLotsQuery.$pending,
   getLotsQuery.$status.map((status) => status === 'initial'),
 )
 
-export const $lotsIds = getLotsQuery.$data.map((data) => data.lots.ids)
-export const $lots = getLotsQuery.$data.map((data) => data.lots.entities)
-export const $artifactsIds = getLotsQuery.$data.map(
-  (data) => data.artifacts.ids,
-)
-export const $artifacts = getLotsQuery.$data.map(
-  (data) => data.artifacts.entities,
-)
+const pageReady = createPageReady({
+  filter: $$account.outputs.$state.map(
+    (state) => state === AccountState.connected,
+  ),
+  route: marketRoute,
+  clock: $$account.outputs.connectionFinished,
+})
 
+export const $$artifactFeed = artifactFeed.factory.createModel({
+  route: artifactRoute,
+  query: getLotsQuery,
+})
+debug(pageReady)
 sample({
-  clock: marketRoute.opened,
-  target: getLotsQuery.start,
+  clock: pageReady,
+  target: $$artifactFeed.initialLoadArtifacts,
 })

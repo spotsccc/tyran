@@ -2,6 +2,7 @@ import { cache, createQuery } from '@farfetched/core'
 import {
   GetArtifactResponse,
   GetArtifactsData,
+  GetArtifactsResponse,
   Property,
   Rarity,
 } from 'api-contract'
@@ -26,7 +27,7 @@ const getArtifactsFx = createEffect(
     offset: number
   }) => {
     const queryParams = createQueryParams(filters)
-    return baseRequest<GetArtifactResponse>({
+    return baseRequest<GetArtifactsResponse>({
       path: `/artifacts?${queryParams}&offset=${offset}&count=${count}`,
       method: Method.GET,
     })

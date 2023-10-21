@@ -20,7 +20,7 @@ export class LotsRepository implements ILotsRepository {
 
   public async insert({ creationDate, artifactId, price }: LotBlank) {
     await this.knex('lots').insert({
-      artifactId,
+      artifact_id: artifactId,
       price,
       creation_date: creationDate,
     })
@@ -53,7 +53,7 @@ export class LotsRepository implements ILotsRepository {
   }): Promise<Lot | null> {
     const [lot] = await this.knex('lots')
       .select('*', 'artifact_id as artifactId', 'creation_date as creationDate')
-      .where({ token_id: artifactId })
+      .where({ artifact_id: artifactId })
     if (!lot) {
       return null
     }

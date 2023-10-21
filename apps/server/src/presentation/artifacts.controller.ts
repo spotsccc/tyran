@@ -12,8 +12,10 @@ import {
 } from '@nestjs/common'
 import {
   Artifact,
+  BoughtFromMarketEvent,
   GetArtifactResponse,
   GetArtifactsResponse,
+  PlacedEvent,
   createSuccessResponse,
 } from 'api-contract'
 import { ArtifactsService, Filter } from '@/application/artifacts.service'
@@ -116,18 +118,42 @@ export class ArtifactsController {
     })
   }
 
-  @Get('/test')
-  public async test() {
-    await this.rmqService.notify('artifacts.bought', { kek: 'shrek' })
-  }
-
   @RMQRoute('artifacts.minted', { manualAck: true })
-  public async bought(artifact: Artifact, @RMQMessage msg: ExtendedMessage) {
+  public async minted(artifact: Artifact) {
+    console.log('\n', artifact, '\n')
     try {
       await this.artifactsService.mint(artifact)
-      this.rmqService.ack(msg)
     } catch (error) {
-      throw Error('Mint artifact event not processd', { cause: error })
+      throw new Error('Minted artifact event not processd', { cause: error })
+    }
+  }
+
+  @RMQRoute('artifacts.bought')
+  public async bought(event: BoughtFromMarketEvent) {
+    try {
+      await this.artifactsService.buyFromMarket({
+        artifactId: event.tokenId,
+        price: event.price,
+        buyer: event.buyer,
+        seller: event.seller,
+      })
+    } catch (error) {
+      throw new Error('Bought artifact event not processd', { cause: error })
+    }
+  }
+
+  @RMQRoute('artifacts.placed', { manualAck: true })
+  public async placed(event: PlacedEvent) {
+    console.log('\n', event, '\n')
+    try {
+      console.log('\n', event, '\n')
+      await this.artifactsService.placeToMarket({
+        artifactId: event.tokenId,
+        seller: event.seller,
+        price: event.price,
+      })
+    } catch (error) {
+      throw new Error('Placed artifact event not processd', { cause: error })
     }
   }
 

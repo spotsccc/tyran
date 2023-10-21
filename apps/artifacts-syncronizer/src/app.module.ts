@@ -1,20 +1,15 @@
 import { Module } from '@nestjs/common'
-import { ClientsModule, Transport } from '@nestjs/microservices'
-import { EventSender } from './application/event-sender'
+import { ConfigModule } from '@nestjs/config'
+import { getRMQConfig } from './configs/rabbitmq.config'
+import { RMQModule } from 'nestjs-rmq'
+import { BlockchainController } from './presentation/blockchain.controller'
 
 @Module({
-  providers: [EventSender],
+  providers: [],
+  controllers: [BlockchainController],
   imports: [
-    ClientsModule.register([
-      {
-        name: 'RABBIT_MQ',
-        transport: Transport.RMQ,
-        options: {
-          urls: [process.env.RABBITMQ_URL ?? 'amqp://rabbitmq:5672'],
-          queue: 'bought',
-        },
-      },
-    ]),
+    ConfigModule.forRoot({ ignoreEnvFile: true }),
+    RMQModule.forRootAsync(getRMQConfig()),
   ],
 })
 export class AppModule { }

@@ -147,6 +147,9 @@ module.exports = {
           width: '100vw',
           height: '100vh',
         },
+        p: {
+          color: theme('colors.base.white'),
+        },
       })
     }),
   ],
