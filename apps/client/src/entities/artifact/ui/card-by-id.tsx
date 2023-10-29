@@ -14,7 +14,6 @@ export function ArtifactCardById({ $artifacts, id }: ArtifactCardByIdProps) {
     keys: [id],
     fn: (artifacts, [id]) => artifacts[id],
   })
-  console.log('kek')
   const { rarity, name, gems, property } = kek
   return (
     <ArtifactCard

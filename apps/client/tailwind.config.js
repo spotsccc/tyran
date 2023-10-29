@@ -150,6 +150,9 @@ module.exports = {
         p: {
           color: theme('colors.base.white'),
         },
+        button: {
+          color: theme('colors.base.white')
+        }
       })
     }),
   ],

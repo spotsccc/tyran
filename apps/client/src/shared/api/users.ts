@@ -29,7 +29,6 @@ export const uploadAvatarMutation = createMutation({
     async ({ file, address }: { file: File; address: string }) => {
       const formData = new FormData()
       formData.append('file', file)
-      console.log('kek')
       return await fetch(`http://localhost:4000/api/users/${address}/avatar`, {
         method: Method.POST,
         body: formData,

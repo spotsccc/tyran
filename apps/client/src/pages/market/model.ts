@@ -1,5 +1,5 @@
 import { sample } from 'effector'
-import { debug, or } from 'patronum'
+import { or } from 'patronum'
 import { getLotsQuery } from '@/shared/api/get-lots'
 import { artifactRoute, marketRoute } from '@/shared/router'
 import { artifactFeed } from '@/widgets/artifact/feed'
@@ -23,8 +23,8 @@ export const $$artifactFeed = artifactFeed.factory.createModel({
   route: artifactRoute,
   query: getLotsQuery,
 })
-debug(pageReady)
+
 sample({
   clock: pageReady,
-  target: $$artifactFeed.initialLoadArtifacts,
+  target: $$artifactFeed.start,
 })

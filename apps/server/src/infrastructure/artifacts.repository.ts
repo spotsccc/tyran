@@ -7,6 +7,7 @@ export type Filter = {
   name?: string
   id?: string
   rarity?: string
+  gem?: string
   property?: string
   isOnSell?: boolean
   owner?: string
@@ -18,7 +19,7 @@ export enum Order {
 }
 
 export class ArtifactsRepository implements IArtifactsRepository {
-  constructor(@InjectConnection() private readonly knex: Knex) { }
+  constructor(@InjectConnection() private readonly knex: Knex) {}
 
   public async getById({ id }: { id: string }): Promise<Artifact | null> {
     const [artifact] = await this.knex<Artifact>('artifacts')
@@ -101,6 +102,8 @@ export class ArtifactsRepository implements IArtifactsRepository {
     const rarityFilter = filters.filter(({ rarity }) => Boolean(rarity))
     const propertyFilter = filters.filter(({ property }) => Boolean(property))
     const ownerFilter = filters.filter(({ owner }) => Boolean(owner))
+    const gemFilter = filters.filter(({ gem }) => Boolean(gem))
+
     return this.knex<Artifact>('artifacts')
       .where((builder) => {
         propertyFilter.forEach((filter) => builder.orWhere(filter))
@@ -110,6 +113,11 @@ export class ArtifactsRepository implements IArtifactsRepository {
       })
       .andWhere((builder) => {
         rarityFilter.forEach((filter) => builder.orWhere(filter))
+      })
+      .andWhere((builder) => {
+        gemFilter.forEach((filter) =>
+          builder.orWhereRaw(`gems @> '[\"${filter.gem}\"]'`),
+        )
       })
       .offset(offset)
       .limit(count)

@@ -14,14 +14,14 @@ type RequestConfig<Body> = {
   headers?: Record<string, string>
 }
 
-export class ForbiddenError extends Error { }
-export class UnauthorizedError extends Error { }
-export class NotFoundError extends Error { }
-export class InternalServerError extends Error { }
+export class ForbiddenError extends Error {}
+export class UnauthorizedError extends Error {}
+export class NotFoundError extends Error {}
+export class InternalServerError extends Error {}
 
-export class BadRequestError extends Error { }
-export class UnknownError extends Error { }
-export class ParsingError extends Error { }
+export class BadRequestError extends Error {}
+export class UnknownError extends Error {}
+export class ParsingError extends Error {}
 
 export const baseRequest = async <
   ResponsePayload extends Response<unknown>,
@@ -33,8 +33,8 @@ export const baseRequest = async <
   headers,
 }: RequestConfig<Body>): Promise<
   ResponsePayload extends SuccessResponse<unknown>
-  ? ResponsePayload['data']
-  : never
+    ? ResponsePayload['data']
+    : never
 > => {
   const res = await fetch(`http://localhost:4000/api${path}`, {
     method,
@@ -73,8 +73,8 @@ export const baseRequest = async <
   const payload = (
     parsedResponse as SuccessResponse<
       ResponsePayload extends SuccessResponse<unknown>
-      ? ResponsePayload['data']
-      : never
+        ? ResponsePayload['data']
+        : never
     >
   ).data
   return payload
