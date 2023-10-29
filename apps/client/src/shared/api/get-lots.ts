@@ -20,4 +20,15 @@ const getLotsFx = createEffect(
 
 export const getLotsQuery = createQuery({
   effect: getLotsFx,
+  mapData: (v) => v.result,
+  initialData: {
+    lots: {
+      ids: [],
+      entities: {},
+    },
+    artifacts: {
+      ids: [],
+      entities: {},
+    },
+  },
 })

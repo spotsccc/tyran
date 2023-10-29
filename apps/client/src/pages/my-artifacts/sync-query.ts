@@ -1,5 +1,5 @@
 import { sample, Store } from 'effector'
-import { Filter } from '@/shared/lib/filter'
+import { Condition } from '@/shared/lib/filter'
 import { controls, myArtifactRoute } from '@/shared/router'
 
 export function syncQuery<T extends string>({
@@ -7,14 +7,14 @@ export function syncQuery<T extends string>({
   name,
 }: {
   name: string
-  $filter: Store<Array<Filter<T>>>
+  $filter: Store<Array<Condition<T>>>
 }) {
   sample({
     clock: $filter,
     source: controls.$query,
     filter: myArtifactRoute.$isOpened,
     fn(query, filter) {
-      return { ...query, [name]: filter.map(({ id }) => id) }
+      return { ...query, [name]: filter.map(({ value }) => value) }
     },
     target: controls.$query,
   })
@@ -26,11 +26,10 @@ export function syncQuery<T extends string>({
       isOpened: myArtifactRoute.$isOpened,
     },
     filter({ filter, isOpened }, query) {
-      let newFilters: Array<Filter<T>> = []
+      let newFilters: Array<Condition<T>> = []
       if (Array.isArray(query[name])) {
         newFilters = query[name].map((param: T) => ({
-          id: param,
-          title: param,
+          value: param,
         }))
       }
       if (typeof query[name] === 'string') {
@@ -38,8 +37,7 @@ export function syncQuery<T extends string>({
           .split(',')
           .filter((param: T) => param.length > 0)
           .map((param: T) => ({
-            id: param,
-            title: param,
+            value: param,
           }))
       }
       return (
@@ -48,7 +46,7 @@ export function syncQuery<T extends string>({
         newFilters.some(
           (newCondition) =>
             filter.findIndex(
-              (condition) => condition.id === newCondition.id,
+              (condition) => condition.value === newCondition.value,
             ) === -1,
         )
       )
@@ -56,14 +54,12 @@ export function syncQuery<T extends string>({
     fn(_, query) {
       if (Array.isArray(query[name])) {
         return query[name].map((param: T) => ({
-          id: param,
-          title: param,
+          value: param,
         }))
       }
       if (typeof query[name] === 'string') {
         return query[name].split(',').map((param: T) => ({
-          id: param,
-          title: param,
+          value: param,
         }))
       }
       return []

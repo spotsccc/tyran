@@ -1,13 +1,16 @@
 import { modelFactory } from 'effector-factorio'
 import { RouteInstance } from 'atomic-router'
-import { Filter, createFilter } from '@/shared/lib/filter'
-import { GetArtifactsData, Property, Rarity } from 'api-contract'
+import { createFilter } from '@/shared/lib/filter'
+import { Gem, GetArtifactsData, Property, Rarity } from 'api-contract'
 import { Filter as QueryFilter } from '@/shared/api'
 import { $$account } from '@/shared/ethereum'
-import { createPagination } from '@/shared/lib/pagination'
-import { combine, createStore, sample } from 'effector'
+import {
+  createInfiniteScroll,
+  createPagination,
+  withParams,
+} from '@/shared/lib/pagination'
+import { combine, createEvent, createStore, sample } from 'effector'
 import { Query } from '@farfetched/core'
-import { createObserver } from '@/shared/lib/observer'
 import { syncQuery } from '@/pages/my-artifacts/sync-query'
 
 type Config = {
@@ -15,9 +18,27 @@ type Config = {
   query: Query<
     { filters: Array<QueryFilter>; offset: number; count: number },
     GetArtifactsData,
-    Error
+    Error,
+    GetArtifactsData
   >
 }
+
+export const RarityOptions = [
+  Rarity.common,
+  Rarity.rare,
+  Rarity.epic,
+  Rarity.legendary,
+  Rarity.mystery,
+]
+
+export const PropertyOptions = [
+  Property.common,
+  Property.magic,
+  Property.cursed,
+  Property.enchanted,
+]
+
+export const GemOptions = [Gem.red, Gem.blue, Gem.green, Gem.yellow]
 
 export const factory = modelFactory(({ route, query }: Config) => {
   const {
@@ -32,23 +53,36 @@ export const factory = modelFactory(({ route, query }: Config) => {
     conditionSelected: propertySelected,
   } = createFilter<Property>()
 
-  const $appliedPropertyFilter = createStore<Array<Filter<Property>>>([])
-  const $appliedRarityFilter = createStore<Array<Filter<Rarity>>>([])
+  const {
+    $filter: $gemFilter,
+    filterCleared: gemClearButtonCleared,
+    conditionSelected: gemSelected,
+  } = createFilter<Gem>()
+
+  syncQuery({ $filter: $rarityFilter, name: 'rarity' })
+
+  syncQuery({ $filter: $propertyFilter, name: 'property' })
+
+  syncQuery({ $filter: $gemFilter, name: 'gem' })
 
   const $params = combine(
     {
-      rarity: $appliedRarityFilter,
-      property: $appliedPropertyFilter,
+      rarity: $rarityFilter,
+      property: $propertyFilter,
+      gem: $gemFilter,
       owner: $$account.outputs.$selected.map((selected) => selected?.address),
     },
-    ({ rarity, property, owner }): { filters: Array<QueryFilter> } => ({
+    ({ rarity, property, owner, gem }): { filters: Array<QueryFilter> } => ({
       filters: [
         { owner },
         ...rarity.map((condition) => ({
-          rarity: condition.id,
+          rarity: condition.value,
         })),
         ...property.map((condition) => ({
-          property: condition.id,
+          property: condition.value,
+        })),
+        ...gem.map((condition) => ({
+          gem: condition.value,
         })),
       ],
     }),
@@ -56,54 +90,83 @@ export const factory = modelFactory(({ route, query }: Config) => {
 
   const {
     $data: $artifacts,
-    load: loadArtifacts,
-    initialLoad: initialLoadArtifacts,
-  } = createPagination({
-    append(acc, next) {
-      return {
-        artifacts: {
-          ids: [...acc.artifacts.ids, ...next.artifacts.ids],
-          entities: { ...acc.artifacts.entities, ...next.artifacts.entities },
-        },
-        lots: {
-          ids: [...acc.lots.ids, ...next.lots.ids],
-          entities: { ...acc.lots.entities, ...next.lots.entities },
-        },
-      }
-    },
-    checkIsEnded(data) {
-      return data.artifacts.ids.length < 10
-    },
-    initialState: {
-      artifacts: { ids: [], entities: {} },
-      lots: { ids: [], entities: {} },
-    },
-    query,
-    count: 10,
-    reset: [$appliedRarityFilter, $appliedPropertyFilter],
+    next,
+    start,
+  } = withParams({
+    pagination: createPagination({
+      append(acc, next) {
+        return {
+          artifacts: {
+            ids: [...acc.artifacts.ids, ...next.artifacts.ids],
+            entities: { ...acc.artifacts.entities, ...next.artifacts.entities },
+          },
+          lots: {
+            ids: [...acc.lots.ids, ...next.lots.ids],
+            entities: { ...acc.lots.entities, ...next.lots.entities },
+          },
+        }
+      },
+      isHasNext(data) {
+        return data.artifacts.ids.length < 10
+      },
+      query,
+      count: 10,
+    }),
     $params,
   })
 
+  const { observerCreated } = createInfiniteScroll({ next })
   const $artifactsIds = $artifacts.map(({ artifacts }) => artifacts.ids)
   const $artifactsEntities = $artifacts.map(
     ({ artifacts }) => artifacts.entities,
   )
+  const $filtersOpened = createStore(false)
 
-  const { intersect, observerCreated } = createObserver()
+  const filtersButtonClicked = createEvent()
+  const clearFiltersButtonsClicked = createEvent()
+  const enterKeyPress = createEvent()
+  const escKeyPress = createEvent()
+  const apllyFilterClicked = createEvent()
+  const outsideFiltersClicked = createEvent()
 
   sample({
-    clock: intersect,
-    filter([intersect]) {
-      return intersect.isIntersecting
-    },
-    target: loadArtifacts,
+    clock: filtersButtonClicked,
+    fn: () => true,
+    target: $filtersOpened,
   })
 
-  syncQuery({ $filter: $rarityFilter, name: 'rarity' })
+  sample({
+    clock: clearFiltersButtonsClicked,
+    target: [propertyClearButtonClicked, rarityClearButtonClicked],
+  })
 
-  syncQuery({ $filter: $propertyFilter, name: 'property' })
+  sample({
+    clock: [
+      escKeyPress,
+      enterKeyPress,
+      apllyFilterClicked,
+      outsideFiltersClicked,
+    ],
+    fn: () => false,
+    target: $filtersOpened,
+  })
+
+  sample({
+    clock: [enterKeyPress, apllyFilterClicked],
+    target: start,
+  })
 
   return {
+    outsideFiltersClicked,
+    gemSelected,
+    $gemFilter,
+    gemClearButtonCleared,
+    apllyFilterClicked,
+    enterKeyPress,
+    escKeyPress,
+    $filtersOpened,
+    clearFiltersButtonsClicked,
+    filtersButtonClicked,
     route,
     raritySelected,
     $rarityFilter,
@@ -114,8 +177,6 @@ export const factory = modelFactory(({ route, query }: Config) => {
     $artifactsIds,
     $artifactsEntities,
     observerCreated,
-    initialLoadArtifacts,
-    $appliedRarityFilter,
-    $appliedPropertyFilter,
+    start,
   }
 })

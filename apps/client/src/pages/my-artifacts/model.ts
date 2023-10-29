@@ -1,5 +1,5 @@
 import { createEvent, createStore, sample } from 'effector'
-import { debug, or } from 'patronum'
+import { or } from 'patronum'
 import { getArtifactsQuery } from '@/shared/api'
 import { $$account, AccountState } from '@/shared/ethereum'
 import { createPageReady } from '@/shared/lib/page-ready'
@@ -26,7 +26,7 @@ const pageReady = createPageReady({
   clock: $$account.outputs.connectionFinished,
 })
 
-export const $$artifactsFeed = artifactFeed.factory.createModel({
+export const artifactsFeedModel = artifactFeed.factory.createModel({
   query: getArtifactsQuery,
   route: artifactRoute,
 })
@@ -38,22 +38,8 @@ sample({
 
 sample({
   clock: [searchButtonClicked, pageReady],
-  source: $$artifactsFeed.$rarityFilter,
-  target: $$artifactsFeed.$appliedRarityFilter,
+  target: artifactsFeedModel.start,
 })
-
-sample({
-  clock: [searchButtonClicked, pageReady],
-  source: $$artifactsFeed.$propertyFilter,
-  target: $$artifactsFeed.$appliedPropertyFilter,
-})
-
-sample({
-  clock: [searchButtonClicked, pageReady],
-  target: $$artifactsFeed.initialLoadArtifacts,
-})
-
-debug(pageReady, $$artifactsFeed.initialLoadArtifacts)
 
 sample({
   clock: uploadButtonClicked,

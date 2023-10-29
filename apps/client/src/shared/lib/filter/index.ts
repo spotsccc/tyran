@@ -1,22 +1,30 @@
-import { createEvent, createStore, sample } from 'effector'
+import { Event, Store, createEvent, createStore, sample } from 'effector'
 
-export type Filter<Type> = {
-  id: Type
-  title: Type
+export type Condition<Type> = {
+  value: Type
 }
 
-export function createFilter<FilterType>() {
-  const $filter = createStore<Array<Filter<FilterType>>>([])
+export type FilterModel<Type> = {
+  $filter: Store<Array<Condition<Type>>>
+  conditionSelected: Event<Condition<Type>>
+  filterCleared: Event<void>
+}
 
-  const conditionSelected = createEvent<Filter<FilterType>>()
+export function createFilter<Type>() {
+  const $filter = createStore<Array<Condition<Type>>>([])
+
+  const conditionSelected = createEvent<Condition<Type>>()
   const filterCleared = createEvent()
 
   sample({
     clock: conditionSelected,
     source: $filter,
     fn(filter, selectedCondition) {
-      if (filter.findIndex(({ id }) => id === selectedCondition.id) !== -1) {
-        return filter.filter(({ id }) => id !== selectedCondition.id)
+      if (
+        filter.findIndex(({ value }) => value === selectedCondition.value) !==
+        -1
+      ) {
+        return filter.filter(({ value }) => value !== selectedCondition.value)
       }
       return [...filter, selectedCondition]
     },

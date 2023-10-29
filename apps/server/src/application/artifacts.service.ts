@@ -17,6 +17,7 @@ export type Filter = {
   rarity?: string
   property?: string
   isOnSell?: boolean
+  gem?: string
   owner?: string
 }
 
