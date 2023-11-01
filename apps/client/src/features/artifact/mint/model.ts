@@ -1,11 +1,11 @@
 import { createEvent, sample } from 'effector'
 import { $$shop } from '@/shared/ethereum'
 
-export const minButtonClicked = createEvent()
+export const mintButtonClicked = createEvent()
 
 export const $loading = $$shop.inputs.buyArtifactFx.pending
 
 sample({
-  clock: minButtonClicked,
+  clock: mintButtonClicked,
   target: $$shop.inputs.buyArtifactFx,
 })
