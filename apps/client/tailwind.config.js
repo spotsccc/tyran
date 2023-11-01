@@ -126,7 +126,8 @@ module.exports = {
     },
     extend: {
       boxShadow: {
-        border: '0 0 20px 10px rgba(0, 0, 0, 0.3)',
+        border: '0 0 100px 10px rgba(255, 255, 255)',
+        borderXl: '0 0 500px 35px rgba(255, 255, 255)',
       },
       borderWidth: {
         1: '1px',
@@ -150,9 +151,14 @@ module.exports = {
         p: {
           color: theme('colors.base.white'),
         },
+        h1: { color: theme('colors.base.white') },
+        h2: { color: theme('colors.base.white') },
+        h3: { color: theme('colors.base.white') },
+        h4: { color: theme('colors.base.white') },
+        h5: { color: theme('colors.base.white') },
         button: {
-          color: theme('colors.base.white')
-        }
+          color: theme('colors.base.white'),
+        },
       })
     }),
   ],
